@@ -1,0 +1,50 @@
+[
+  {
+    "selectionId": "120206941_1",
+    "name": "Reims",
+    "idfolifestate": "N",
+    "idfoselectionsuspensiontype": "",
+    "currentPriceUp": "375",
+    "currentPriceDown": "100",
+    "currentHandicap": "",
+    "currentLowerBand": "",
+    "currentUpperBand": "",
+    "currentHomeScoreLine": null,
+    "currentAwayScoreLine": null,
+    "hadValue": "H",
+    "selPercentage": 1,
+    "hashCode": 1781552682
+  },
+  {
+    "selectionId": "120206942_1",
+    "name": "Match nul",
+    "idfolifestate": "N",
+    "idfoselectionsuspensiontype": "",
+    "currentPriceUp": "285",
+    "currentPriceDown": "100",
+    "currentHandicap": "",
+    "currentLowerBand": "",
+    "currentUpperBand": "",
+    "currentHomeScoreLine": null,
+    "currentAwayScoreLine": null,
+    "hadValue": "D",
+    "selPercentage": 3,
+    "hashCode": 421631066
+  },
+  {
+    "selectionId": "120206943_1",
+    "name": "Lyon",
+    "idfolifestate": "N",
+    "idfoselectionsuspensiontype": "",
+    "currentPriceUp": "67",
+    "currentPriceDown": "100",
+    "currentHandicap": "",
+    "currentLowerBand": "",
+    "currentUpperBand": "",
+    "currentHomeScoreLine": null,
+    "currentAwayScoreLine": null,
+    "hadValue": "A",
+    "selPercentage": 96,
+    "hashCode": 1692671480
+  }
+]
