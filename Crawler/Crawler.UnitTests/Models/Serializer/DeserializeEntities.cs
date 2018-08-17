@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Crawler.UnitTests.Models
 {
     [TestFixture]
-    public class DeserializeEntities
+    public class DeserializeEntitiesTest
     {
         public string JsonInput { get; set; }
         public List<Bet> ExpectedBets { get; set; }

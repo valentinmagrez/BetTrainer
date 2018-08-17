@@ -1,4 +1,4 @@
-using Crawler.Models.Converter.UnibetConverter;
+using Crawler.Models.Converter;
 
 namespace Crawler.Models.Serializer
 {

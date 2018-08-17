@@ -27,6 +27,9 @@
     <None Update="Models\Serializer\resultBetSelections.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Services\ApiFinder\discoveringResult.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

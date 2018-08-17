@@ -6,7 +6,7 @@ using Crawler.Models.Serializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Crawler.Models.Converter.UnibetConverter
+namespace Crawler.Models.Converter
 {
     public class EventConverter : JsonConverter
     {

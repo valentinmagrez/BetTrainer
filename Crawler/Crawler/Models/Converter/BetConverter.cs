@@ -5,7 +5,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Crawler.Models.Converter.UnibetConverter
+namespace Crawler.Models.Converter
 {
     public class BetConverter : JsonConverter
     {
