@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Crawler.Models.Converter.UnibetConverter;
-using Newtonsoft.Json;
 
 namespace Crawler.Models
 {
@@ -38,16 +35,6 @@ namespace Crawler.Models
                 result = (result * 397) ^ Percentage.GetHashCode();
                 return result;
             }
-        }
-    }
-
-    public class BetJsonDeserializer
-    {
-        public string JsonInput { get; set; }
-
-        public List<Bet> Deserialize()
-        {
-            return JsonConvert.DeserializeObject<List<Bet>>(JsonInput, new BetConverter());
         }
     }
 }
