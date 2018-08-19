@@ -1,23 +1,26 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Crawler.Services.ApiFinder
 {
     public class ApiUriFinder
     {
-        public ApiUriFinder()
+        private readonly string _apiResult =
+            "https://www.unibet.fr/zones/automaticcoupon/display-markets.json?nodeId={0}&type=R%25C3%25A9sultat";
+
+        public ApiUriFinder(IApiClient client)
         {
-            UriCalling = "https://www.unibet.fr/sport/football/ligue-1-conforama/ligue-1-matchs";
+            ApiClient = client;
         }
 
-        public string UriCalling { get; set; }
+        public IApiClient ApiClient { get; set; }
 
-        public async Task<decimal> Find()
+        public async Task<string> Find(string uriCalled)
         {
-            var response = await GetResponseFromUri();
-            return ExtractApiIdEndpoint(response);
+            var response = await ApiClient.GetResponseFromUri(uriCalled);
+            var id =  ExtractApiIdEndpoint(response);
+
+            return string.Format(_apiResult, id);
         }
 
         public decimal ExtractApiIdEndpoint(string content)
@@ -26,24 +29,6 @@ namespace Crawler.Services.ApiFinder
             var resultRegex = regex.Match(content).Groups[1].Value;
 
             return decimal.Parse(resultRegex);
-        }
-
-        private async Task<string> GetResponseFromUri()
-        {
-            var client = new HttpClient
-            {
-                DefaultRequestHeaders = {Accept = {new MediaTypeWithQualityHeaderValue("application/json")}}
-            };
-            var response = await client
-                .GetAsync(UriCalling);
-
-            if (!response.IsSuccessStatusCode)
-                return null;
-
-            var content = response.Content;
-            var json = content.ReadAsStringAsync();
-
-            return await json;
         }
     }
 }

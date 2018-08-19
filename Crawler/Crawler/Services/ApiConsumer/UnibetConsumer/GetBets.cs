@@ -2,16 +2,20 @@
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using Crawler.Models.Serializer;
+using Crawler.Services.ApiFinder;
 
 namespace Crawler.Services.ApiConsumer.UnibetConsumer
 {
     public class GetBets
     {
         private readonly EventJsonSerializer _deserializer;
+        private readonly ApiUriFinder _uriFinder;
+        private const string _uri = "https://www.unibet.fr/sport/football/ligue-1-conforama/ligue-1-matchs";
 
         public GetBets()
         {
             _deserializer = new EventJsonSerializer();
+            _uriFinder = new ApiUriFinder(new ApiClient());
         }
 
         public void Call()
@@ -22,26 +26,13 @@ namespace Crawler.Services.ApiConsumer.UnibetConsumer
             };
             var response = client
                 .GetAsync("https://www.unibet.fr/sport/football/ligue-1-conforama/ligue-1-matchs").Result;
-       
-            if (response.IsSuccessStatusCode)
-            {
-               var content = response.Content;
-                var json = content.ReadAsStringAsync().Result;
-                var result = json.ToString();
-                var regex = new Regex(@"nodeId(\s)*:(\s)*([0-9]+),");
-                var resultRegex = regex.Matches(result);
-            }
-            //var response = client
-            //    .GetAsync("zones/automaticcoupon/display-markets.json?nodeId=435774672&type=R%25C3%25A9sultat").Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var content = response.Content;
-            //    var json = content.ReadAsStringAsync();
-            //}
-            //else
-            //{
-            //    //Something has gone wrong, handle it here
-            //}
+
+            if (!response.IsSuccessStatusCode) return;
+            var content = response.Content;
+            var json = content.ReadAsStringAsync().Result;
+            var result = json.ToString();
+            var regex = new Regex(@"nodeId(\s)*:(\s)*([0-9]+),");
+            var resultRegex = regex.Matches(result);
         }
     }
 }
