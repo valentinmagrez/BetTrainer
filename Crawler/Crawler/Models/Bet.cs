@@ -1,5 +1,3 @@
-using System;
-
 namespace Crawler.Models
 {
     public class Bet

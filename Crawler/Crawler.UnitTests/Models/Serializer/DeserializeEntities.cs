@@ -7,7 +7,7 @@ using Crawler.Models.Serializer;
 using NFluent;
 using NUnit.Framework;
 
-namespace Crawler.UnitTests.Models
+namespace Crawler.UnitTests.Models.Serializer
 {
     [TestFixture]
     public class DeserializeEntitiesTest
