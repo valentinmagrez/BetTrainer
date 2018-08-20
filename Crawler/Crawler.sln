@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler", "Crawler\Crawler.csproj", "{F5A65668-0718-49DC-A751-597FE2281A2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawler", "Crawler\Crawler.csproj", "{F5A65668-0718-49DC-A751-597FE2281A2F}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D806C30D-6E8C-48E6-85F9-092F49AE6551}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.UnitTests", "Crawler.UnitTests\Crawler.UnitTests.csproj", "{9595A4DE-FF59-4FE8-AEE0-B6B885C075B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawler.UnitTests", "Crawler.UnitTests\Crawler.UnitTests.csproj", "{9595A4DE-FF59-4FE8-AEE0-B6B885C075B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{08344859-9E17-4406-B420-2CB33292CB0F}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

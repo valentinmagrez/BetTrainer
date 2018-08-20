@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Crawler.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +28,11 @@ namespace Crawler
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //Configure db
+            // Database connection string.
+            var connection = @"Server=db;Database=master;User=sa;Password=password;";
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(connection));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

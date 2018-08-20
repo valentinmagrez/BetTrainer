@@ -2,6 +2,7 @@ namespace Crawler.Models
 {
     public class Bet
     {
+        public int Id { get; set; }
         public decimal Odd { get; set; }
         public string Name { get; set; }
         public decimal Percentage { get; set; }

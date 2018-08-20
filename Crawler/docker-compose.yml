@@ -5,4 +5,11 @@ services:
     image: ${DOCKER_REGISTRY}crawler
     build:
       context: .
-      dockerfile: Crawler/Dockerfile
+      dockerfile: Crawler/Dockerfile        
+    depends_on:
+          - db
+  db:
+    image: "microsoft/mssql-server-linux"
+    environment:
+        SA_PASSWORD: "password"
+        ACCEPT_EULA: "Y"
