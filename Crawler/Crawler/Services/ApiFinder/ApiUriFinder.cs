@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.Services.ApiFinder
 {
-    public class ApiUriFinder
+    public class ApiUriFinder : IApiUriFinder
     {
         private readonly string _apiResult =
             "https://www.unibet.fr/zones/automaticcoupon/display-markets.json?nodeId={0}&type=R%25C3%25A9sultat";

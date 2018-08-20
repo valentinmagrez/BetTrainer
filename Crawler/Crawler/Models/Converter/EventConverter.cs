@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Crawler.Models.Serializer;
@@ -24,27 +25,31 @@ namespace Crawler.Models.Converter
 
             var  item = JObject.Load(reader);
 
-            var eventByTimestampJson = ExtractEventByTimeStamp(item);
-
-            foreach (var timestamp in eventByTimestampJson)
+            try
             {
-                var events = timestamp.First().Children();
-                foreach (var betEveent in events)
+                var eventByTimestampJson = ExtractEventByTimeStamp(item);
+
+                foreach (var timestamp in eventByTimestampJson)
                 {
-                    result.Add(new Event
+                    var events = timestamp.First().Children();
+                    foreach (var betEveent in events)
                     {
-                        BetAvailables = DeserializeBets(betEveent["selections"].ToString()),
-                        BetType = betEveent["marketName"].ToString(),
-                        CompetitionName = betEveent["competitionName"].ToString(),
-                        Name = betEveent["eventName"].ToString(),
-                        Sport = betEveent["sport"].ToString(),
-                        StartDate = TimestampToDatetime(betEveent["eventStartDate"].ToString()),
-                    });
+                        result.Add(new Event
+                        {
+                            BetAvailables = DeserializeBets(betEveent["selections"].ToString()),
+                            BetType = betEveent["marketName"].ToString(),
+                            CompetitionName = betEveent["competitionName"].ToString(),
+                            Name = betEveent["eventName"].ToString(),
+                            Sport = betEveent["sport"].ToString(),
+                            StartDate = TimestampToDatetime(betEveent["eventStartDate"].ToString()),
+                        });
+                    }
                 }
             }
-
-            foreach(var eventResult in result)
-                Console.WriteLine(eventResult);
+            catch (Exception)
+            {
+                Debug.WriteLine($"Erreur durant la deserialisation du json => {item}");
+            }
 
             return result;
         }

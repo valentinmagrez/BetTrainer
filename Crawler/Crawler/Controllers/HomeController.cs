@@ -1,16 +1,17 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Crawler.Models;
-using Crawler.Services.ApiConsumer.UnibetConsumer;
+using Crawler.Tasks;
 
 namespace Crawler.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var service = new GetBets();
-            service.Call();
+            var service = new RetrieveBetsTask();
+            await service.Start();
 
             return View();
         }

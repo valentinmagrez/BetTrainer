@@ -1,6 +1,5 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Crawler.Models.Serializer;
 using Crawler.Services.ApiFinder;
 
@@ -8,31 +7,28 @@ namespace Crawler.Services.ApiConsumer.UnibetConsumer
 {
     public class GetBets
     {
-        private readonly EventJsonSerializer _deserializer;
-        private readonly ApiUriFinder _uriFinder;
-        private const string _uri = "https://www.unibet.fr/sport/football/ligue-1-conforama/ligue-1-matchs";
+        private readonly IApiUriFinder _apiFinder;
+        private readonly IApiClient _apiClient;
+        private readonly EventJsonSerializer _eventSerializer;
 
         public GetBets()
         {
-            _deserializer = new EventJsonSerializer();
-            _uriFinder = new ApiUriFinder(new ApiClient());
+            _apiFinder = new ApiUriFinder(new ApiClient());
+            _apiClient = new ApiClient();
+            _eventSerializer = new EventJsonSerializer();
         }
 
-        public void Call()
+        public async Task Call(string uri)
         {
-            var client = new HttpClient
-            {
-                DefaultRequestHeaders = {Accept = {new MediaTypeWithQualityHeaderValue("application/json")}}
-            };
-            var response = client
-                .GetAsync("https://www.unibet.fr/sport/football/ligue-1-conforama/ligue-1-matchs").Result;
+            var apiUri = await _apiFinder.Find(uri);
+            if (apiUri == null)
+                return;
 
-            if (!response.IsSuccessStatusCode) return;
-            var content = response.Content;
-            var json = content.ReadAsStringAsync().Result;
-            var result = json.ToString();
-            var regex = new Regex(@"nodeId(\s)*:(\s)*([0-9]+),");
-            var resultRegex = regex.Matches(result);
+            var jsonResponse = await _apiClient.GetResponseFromUri(apiUri);
+            _eventSerializer.JsonInput = jsonResponse;
+            var events = _eventSerializer.Deserialize();
+
+            events.ForEach(_=>Debug.WriteLine(_));
         }
     }
 }
