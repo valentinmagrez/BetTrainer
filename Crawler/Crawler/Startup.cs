@@ -30,7 +30,7 @@ namespace Crawler
 
             //Configure db
             // Database connection string.
-            var connection = @"Server=db;Database=master;User=sa;Password=password;";
+            var connection = @"Server=db,1433;Database=master;User=sa;Password=password12345PASSWORD;";
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(connection));
 

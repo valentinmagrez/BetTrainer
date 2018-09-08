@@ -10,6 +10,8 @@ services:
           - db
   db:
     image: "microsoft/mssql-server-linux"
+    expose:
+      - "1433"
     environment:
-        SA_PASSWORD: "password"
+        SA_PASSWORD: "password12345PASSWORD"
         ACCEPT_EULA: "Y"
