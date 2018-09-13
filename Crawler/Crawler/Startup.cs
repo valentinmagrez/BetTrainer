@@ -28,13 +28,13 @@ namespace Crawler
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             //Configure db
             // Database connection string.
             var connection = @"Server=db,1433;Database=master;User=sa;Password=password12345PASSWORD;";
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(connection));
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +60,12 @@ namespace Crawler
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+            }
         }
     }
 }
