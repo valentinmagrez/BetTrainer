@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Crawler.Models;
+using Crawler.Models.Entity;
 using Crawler.Models.Serializer;
 using NFluent;
 using NUnit.Framework;

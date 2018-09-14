@@ -1,4 +1,4 @@
-namespace Crawler.Models
+namespace Crawler.Models.Entity
 {
     public class Bet
     {

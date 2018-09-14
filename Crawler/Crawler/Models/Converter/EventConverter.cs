@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Crawler.Models.Entity;
 using Crawler.Models.Serializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

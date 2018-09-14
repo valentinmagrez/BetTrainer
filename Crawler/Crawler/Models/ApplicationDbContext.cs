@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Crawler.Models.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crawler.Models
 {
