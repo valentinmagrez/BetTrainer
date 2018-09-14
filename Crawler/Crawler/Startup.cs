@@ -1,4 +1,5 @@
 ﻿using Crawler.Models;
+using Crawler.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +36,8 @@ namespace Crawler
             var connection = @"Server=db,1433;Database=master;User=sa;Password=password12345PASSWORD;";
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(connection));
+
+            services.AddScoped<IRetrieveBetsTask, RetrieveBetsTask>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,10 +8,16 @@ namespace Crawler.Controllers
 {
     public class HomeController : Controller
     {
+        readonly IRetrieveBetsTask _retrieveBetsTaskService;
+
+        public HomeController(IRetrieveBetsTask retrieveBetsTaskService)
+        {
+            _retrieveBetsTaskService = retrieveBetsTaskService;
+        }
+
         public async Task<IActionResult> Index()
         {
-            var service = new RetrieveBetsTask();
-            await service.Start();
+            await _retrieveBetsTaskService.Start();
 
             return View();
         }
