@@ -9,8 +9,11 @@ namespace Crawler.Models
             : base(options)
         { }
 
-        public DbSet<Event> Events { get; set; }
-        public DbSet<Bet> Bets { get; set; }
-        public DbSet<UriBetsToParse> UrlsBetsToParse { get; set; }
+        public ApplicationDbContext()
+        { }
+
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Bet> Bets { get; set; }
+        public virtual DbSet<UriBetsToParse> UrisBetsToParse { get; set; }
     }
 }

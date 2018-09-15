@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Crawler.Models;
 using Crawler.Models.Entity;
 using Crawler.Services.ApiConsumer.UnibetConsumer;
-using Microsoft.EntityFrameworkCore;
 
 namespace Crawler.Tasks
 {
@@ -17,33 +16,32 @@ namespace Crawler.Tasks
         //};
 
         private List<UriBetsToParse> _uriToParse;
-
         private List<UriBetsToParse> UrisToParse
         {
             get
             {
                 if (_uriToParse is null)
-                    _uriToParse = _context.UrlsBetsToParse.ToList();
+                    _uriToParse = _context.UrisBetsToParse.ToList();
 
                 return _uriToParse;
             }
         }
 
-        private readonly GetBets _getBets;
+        public IGetBets GetBets { get; set; }
 
         private readonly ApplicationDbContext _context;
 
         public RetrieveBetsTask(ApplicationDbContext ctx)
         {
             _context = ctx;
-            _getBets = new GetBets();
+            GetBets = new GetBets();
         }
 
         public async Task Start()
         {
             foreach (var uri in UrisToParse)
             {
-                await _getBets.Call(uri.Value);
+                await GetBets.Call(uri.Value);
             }
         }
     }

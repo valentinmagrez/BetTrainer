@@ -5,7 +5,7 @@ using Crawler.Services.ApiFinder;
 
 namespace Crawler.Services.ApiConsumer.UnibetConsumer
 {
-    public class GetBets
+    public class GetBets : IGetBets
     {
         private readonly IApiUriFinder _apiFinder;
         private readonly IApiClient _apiClient;
