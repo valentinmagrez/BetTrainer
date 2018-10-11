@@ -1,7 +1,11 @@
-﻿@{
+﻿@model Crawler.ViewModels.UriBetsToParseViewModel
+@{
     ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<form asp-action="AddUri" method="post">
+    Email:  <input asp-for="UrlToParse" /> <br />
+    <button type="submit">Register</button>
+</form>

@@ -8,3 +8,9 @@ EntityFrameworkCore\Add-Migration datamig_name
 
 ### Migrate 
 EntityFrameworkCore\Update-Database
+
+
+# View #
+
+## CRUD ##
+https://docs.microsoft.com/fr-fr/aspnet/core/data/ef-mvc/crud?view=aspnetcore-2.0
