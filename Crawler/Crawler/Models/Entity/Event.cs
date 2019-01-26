@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Crawler.Models.Entity;
 
-namespace Crawler.Models
+namespace Crawler.Models.Entity
 {
     public class Event
     {

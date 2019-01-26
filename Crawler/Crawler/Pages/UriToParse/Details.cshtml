@@ -18,6 +18,15 @@
             @Html.DisplayFor(model => model.UriBetsToParse.Value)
         </dd>
     </dl>
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Récupérer les paries" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.UriBetsToParse.Id">Edit</a> |

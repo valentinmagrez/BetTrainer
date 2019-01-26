@@ -33,16 +33,16 @@ namespace Crawler.Models.Converter
                 foreach (var timestamp in eventByTimestampJson)
                 {
                     var events = timestamp.First().Children();
-                    foreach (var betEveent in events)
+                    foreach (var betEvent in events)
                     {
                         result.Add(new Event
                         {
-                            BetAvailables = DeserializeBets(betEveent["selections"].ToString()),
-                            BetType = betEveent["marketName"].ToString(),
-                            CompetitionName = betEveent["competitionName"].ToString(),
-                            Name = betEveent["eventName"].ToString(),
-                            Sport = betEveent["sport"].ToString(),
-                            StartDate = TimestampToDatetime(betEveent["eventStartDate"].ToString()),
+                            BetAvailables = DeserializeBets(betEvent["selections"].ToString()),
+                            BetType = betEvent["marketName"].ToString(),
+                            CompetitionName = betEvent["competitionName"].ToString(),
+                            Name = betEvent["eventName"].ToString(),
+                            Sport = betEvent["sport"].ToString(),
+                            StartDate = TimestampToDatetime(betEvent["eventStartDate"].ToString()),
                         });
                     }
                 }

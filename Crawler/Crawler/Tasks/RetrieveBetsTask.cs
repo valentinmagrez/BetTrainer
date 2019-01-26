@@ -41,8 +41,13 @@ namespace Crawler.Tasks
         {
             foreach (var uri in UrisToParse)
             {
-                await GetBets.Call(uri.Value);
+                await Start(uri);
             }
+        }
+
+        public async Task Start(UriBetsToParse uri)
+        {
+                await GetBets.Call(uri.Value);
         }
     }
 }
