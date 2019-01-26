@@ -12,10 +12,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.UriBetsToParse.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UriBetsToParse.Name)
+        </dd>        
+        <dt>
             @Html.DisplayNameFor(model => model.UriBetsToParse.Value)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UriBetsToParse.Value)
+            <a href="@Html.DisplayFor(model => model.UriBetsToParse.Value)">@Html.DisplayFor(model => model.UriBetsToParse.Value)</a>
         </dd>
     </dl>
     <div class="col-md-4">
