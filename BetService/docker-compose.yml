@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  betservice:
+    image: ${DOCKER_REGISTRY-}betservice
+    build:
+      context: .
+      dockerfile: BetService/Dockerfile
+    depends_on:
+      - db
+  db:
+    image: "microsoft/mssql-server-linux"
+    expose:
+      - "1433"
+    environment:
+        SA_PASSWORD: "password12345PASSWORD"
+        ACCEPT_EULA: "Y"
