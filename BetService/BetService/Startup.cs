@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,17 +25,26 @@ namespace BetService
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddRouting(options => options.LowercaseUrls = true);
 
+            ConfigureDatabase(services);
+            ConfigureApi(services);
+        }
+
+        private static void ConfigureApi(IServiceCollection services)
+        {
+            //Versioning
+            services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
+            
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "BetService Api", Version = "v1"}); });
+        }
+
+        private static void ConfigureDatabase(IServiceCollection services)
+        {
             //Configure db
             // Database connection string.
             var connection = @"Server=db,1433;Database=master;User=sa;Password=password12345PASSWORD;";
             services.AddDbContext<BetDbContext>(
                 options => options.UseSqlServer(connection));
-
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "BetService Api", Version = "v1" });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
