@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BetService.Models
+﻿namespace BetService.Models
 {
     public class Bet
     {
@@ -11,5 +6,6 @@ namespace BetService.Models
         public decimal Odd { get; set; }
         public string Name { get; set; }
         public decimal Percentage { get; set; }
+        public BetCategory BetCategory { get; set; }
     }
 }
