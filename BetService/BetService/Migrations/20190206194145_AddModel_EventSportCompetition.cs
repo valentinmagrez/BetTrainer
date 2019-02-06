@@ -8,6 +8,44 @@ namespace BetService.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Sport",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sport", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Competition",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    SportId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Competition", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Competition_Sport_SportId",
+                        column: x => x.SportId,
+                        principalTable: "Sport",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Competition_SportId",
+                table: "Competition",
+                column: "SportId");
+
             migrationBuilder.AddColumn<long>(
                 name: "EventId",
                 table: "BetItems",
@@ -57,6 +95,12 @@ namespace BetService.Migrations
             migrationBuilder.DropColumn(
                 name: "EventId",
                 table: "BetItems");
+
+            migrationBuilder.DropTable(
+                name: "Competition");
+
+            migrationBuilder.DropTable(
+                name: "Sport");
         }
     }
 }

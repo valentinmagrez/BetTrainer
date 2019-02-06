@@ -72,6 +72,11 @@ namespace BetService
             app.UseHttpsRedirection();
             app.UseMvc();
 
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<BetDbContext>();
+                dbContext.Database.Migrate();
+            }
         }
 
         private static void ParametrizeSwagger(IApplicationBuilder app)

@@ -57,6 +57,23 @@ namespace BetService.Migrations
                     b.ToTable("BetCategory");
                 });
 
+            modelBuilder.Entity("BetService.Models.Competition", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<long?>("SportId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SportId");
+
+                    b.ToTable("Competition");
+                });
+
             modelBuilder.Entity("BetService.Models.Event", b =>
                 {
                     b.Property<long>("Id")
@@ -72,6 +89,19 @@ namespace BetService.Migrations
                     b.ToTable("Event");
                 });
 
+            modelBuilder.Entity("BetService.Models.Sport", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sport");
+                });
+
             modelBuilder.Entity("BetService.Models.Bet", b =>
                 {
                     b.HasOne("BetService.Models.BetCategory", "BetCategory")
@@ -81,6 +111,13 @@ namespace BetService.Migrations
                     b.HasOne("BetService.Models.Event", "Event")
                         .WithMany("Bets")
                         .HasForeignKey("EventId");
+                });
+
+            modelBuilder.Entity("BetService.Models.Competition", b =>
+                {
+                    b.HasOne("BetService.Models.Sport", "Sport")
+                        .WithMany("Competitions")
+                        .HasForeignKey("SportId");
                 });
 #pragma warning restore 612, 618
         }
