@@ -7,5 +7,6 @@
         public string Name { get; set; }
         public decimal Percentage { get; set; }
         public BetCategory BetCategory { get; set; }
+        public Event Event { get; set; }
     }
 }

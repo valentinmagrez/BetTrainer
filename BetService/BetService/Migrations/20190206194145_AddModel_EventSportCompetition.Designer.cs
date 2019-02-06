@@ -4,14 +4,16 @@ using BetService.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BetService.Migrations
 {
     [DbContext(typeof(BetDbContext))]
-    partial class BetContextModelSnapshot : ModelSnapshot
+    [Migration("20190206194145_AddModel_EventSportCompetition")]
+    partial class AddModel_EventSportCompetition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
