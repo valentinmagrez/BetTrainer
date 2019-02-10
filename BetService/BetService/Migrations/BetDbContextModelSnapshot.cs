@@ -4,16 +4,14 @@ using BetService.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BetService.Migrations
 {
     [DbContext(typeof(BetDbContext))]
-    [Migration("20190206194145_AddModel_EventSportCompetition")]
-    partial class AddModel_EventSportCompetition
+    partial class BetDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,13 +21,12 @@ namespace BetService.Migrations
 
             modelBuilder.Entity("BetService.Models.Bet", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("BetCategoryId");
+                    b.Property<Guid?>("BetCategoryId");
 
-                    b.Property<long?>("EventId");
+                    b.Property<Guid?>("EventId");
 
                     b.Property<string>("Name");
 
@@ -48,9 +45,8 @@ namespace BetService.Migrations
 
             modelBuilder.Entity("BetService.Models.BetCategory", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -59,11 +55,27 @@ namespace BetService.Migrations
                     b.ToTable("BetCategory");
                 });
 
-            modelBuilder.Entity("BetService.Models.Event", b =>
+            modelBuilder.Entity("BetService.Models.Competition", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("SportId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SportId");
+
+                    b.ToTable("Competition");
+                });
+
+            modelBuilder.Entity("BetService.Models.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -72,6 +84,18 @@ namespace BetService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Event");
+                });
+
+            modelBuilder.Entity("BetService.Models.Sport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sport");
                 });
 
             modelBuilder.Entity("BetService.Models.Bet", b =>
@@ -83,6 +107,13 @@ namespace BetService.Migrations
                     b.HasOne("BetService.Models.Event", "Event")
                         .WithMany("Bets")
                         .HasForeignKey("EventId");
+                });
+
+            modelBuilder.Entity("BetService.Models.Competition", b =>
+                {
+                    b.HasOne("BetService.Models.Sport", "Sport")
+                        .WithMany("Competitions")
+                        .HasForeignKey("SportId");
                 });
 #pragma warning restore 612, 618
         }

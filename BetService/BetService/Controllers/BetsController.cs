@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace BetService.Controllers
 
         // GET: api/Bets/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bet>> GetBet(long id)
+        public async Task<ActionResult<Bet>> GetBet(Guid id)
         {
             var bet = await _context.BetItems.FindAsync(id);
 
@@ -42,7 +43,7 @@ namespace BetService.Controllers
 
         // PUT: api/Bets/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBet(long id, Bet bet)
+        public async Task<IActionResult> PutBet(Guid id, Bet bet)
         {
             if (id != bet.Id)
             {
@@ -82,7 +83,7 @@ namespace BetService.Controllers
 
         // DELETE: api/Bets/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Bet>> DeleteBet(long id)
+        public async Task<ActionResult<Bet>> DeleteBet(Guid id)
         {
             var bet = await _context.BetItems.FindAsync(id);
             if (bet == null)
@@ -96,7 +97,7 @@ namespace BetService.Controllers
             return bet;
         }
 
-        private bool BetExists(long id)
+        private bool BetExists(Guid id)
         {
             return _context.BetItems.Any(e => e.Id == id);
         }
