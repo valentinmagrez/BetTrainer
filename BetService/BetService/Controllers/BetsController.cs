@@ -9,7 +9,7 @@ using BetService.Models;
 namespace BetService.Controllers
 {
     [ApiVersion("1.0")]
-    [Route("api/[controller]")]
+    [Route("api/{v:apiVersion}/[controller]")]
     [ApiController]
     public class BetsController : ControllerBase
     {
@@ -20,14 +20,14 @@ namespace BetService.Controllers
             _context = context;
         }
 
-        // GET: api/Bets
+        // GET: api/bets
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bet>>> GetBetItems()
         {
             return await _context.BetItems.ToListAsync();
         }
 
-        // GET: api/Bets/5
+        // GET: api/bets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Bet>> GetBet(Guid id)
         {

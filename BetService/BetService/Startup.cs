@@ -32,7 +32,12 @@ namespace BetService
         private static void ConfigureApi(IServiceCollection services)
         {
             //Versioning
-            services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
+            services.AddApiVersioning(_ =>
+                {
+                    _.AssumeDefaultVersionWhenUnspecified = true;
+                    _.DefaultApiVersion = new ApiVersion(1, 0);
+                }
+            );
             
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "BetService Api", Version = "v1"}); });
