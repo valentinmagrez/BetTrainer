@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,7 +20,7 @@ namespace BetService.Pages.Admin.BetCategory
         [BindProperty]
         public Models.BetCategory BetCategory { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
@@ -63,7 +64,7 @@ namespace BetService.Pages.Admin.BetCategory
             return RedirectToPage("./Index");
         }
 
-        private bool BetCategoryExists(long id)
+        private bool BetCategoryExists(Guid id)
         {
             return _context.BetCategory.Any(e => e.Id == id);
         }

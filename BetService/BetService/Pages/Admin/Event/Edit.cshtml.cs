@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BetService.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace BetService.Pages.Admin.Event
         [BindProperty]
         public Models.Event Event { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
@@ -63,7 +64,7 @@ namespace BetService.Pages.Admin.Event
             return RedirectToPage("./Index");
         }
 
-        private bool EventExists(long id)
+        private bool EventExists(Guid id)
         {
             return _context.Event.Any(e => e.Id == id);
         }
