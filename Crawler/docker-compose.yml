@@ -7,11 +7,21 @@ services:
       context: .
       dockerfile: Crawler/Dockerfile        
     depends_on:
-          - db
-  db:
+          - dbcrawler
+    environment:
+      BETSERVICE_URI: "https://betservice:443/api"
+    networks:
+      - BetTrainer
+  dbcrawler:
     image: "microsoft/mssql-server-linux"
     expose:
       - "1433"
     environment:
         SA_PASSWORD: "password12345PASSWORD"
         ACCEPT_EULA: "Y"
+    networks:
+      - BetTrainer
+
+networks:
+  BetTrainer:
+    external: true

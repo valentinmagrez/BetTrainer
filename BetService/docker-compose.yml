@@ -8,6 +8,8 @@ services:
       dockerfile: BetService/Dockerfile
     depends_on:
       - db
+    networks:
+      - BetTrainer
   db:
     image: "microsoft/mssql-server-linux"
     expose:
@@ -15,3 +17,9 @@ services:
     environment:
         SA_PASSWORD: "password12345PASSWORD"
         ACCEPT_EULA: "Y"
+    networks:
+      - BetTrainer
+
+networks:
+  BetTrainer:
+    external: true
