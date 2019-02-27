@@ -21,9 +21,12 @@ namespace BetService.Controllers
 
         // GET: api/BetCategories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BetCategory>>> GetBetCategory()
+        public async Task<ActionResult<IEnumerable<BetCategory>>> GetBetCategory(string name)
         {
-            return await _context.BetCategory.ToListAsync();
+            if (string.IsNullOrEmpty(name))
+                return await _context.BetCategory.ToListAsync();
+
+            return await _context.BetCategory.Where(_=>_.Name == name).ToListAsync();
         }
 
         // GET: api/BetCategories/5
